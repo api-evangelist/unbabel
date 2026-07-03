@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Unbabel
+providerId: unbabel
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Translation
+- LangOps
+- Rate Limiting
+- Quotas
+description: >-
+  Unbabel does not publish fixed numeric rate limits for the Translation API
+  (tapi/v2) in its public developer documentation. Because translation is an
+  asynchronous, enterprise, quote-based service, throughput is governed in
+  practice by the customer's contracted translation volume/commitment rather
+  than by a documented per-second or per-minute request cap. Submitting a
+  translation returns immediately with a job uid; clients then poll the
+  translation/{uid} endpoint or receive a callback, so polling should be
+  reasonable and backed off rather than tight-looped.
+notes: >-
+  No per-account or per-endpoint numeric request limit is documented as of the
+  review date. Confirm any operational limits with Unbabel during onboarding.
+  The standalone Widn.AI API is governed by its own separate limits.
+sources:
+- https://developers.unbabel.com
+- https://developers.unbabel.com/docs/introduction
+- https://unbabel.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: Translation API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the tapi/v2 API.
+- name: Translation Volume
+  scope: account
+  metric: words
+  limit: per contract
+  notes: Effective throughput is bounded by the customer's committed/quoted monthly translation volume.
+- name: Job Status Polling
+  scope: account
+  metric: requests
+  limit: not published
+  notes: Poll translation/{uid} with backoff, or use a callback_url, since jobs complete asynchronously.
+policies:
+- name: Asynchronous Processing
+  description: Translation and mt_translation submissions return a job uid immediately; results are retrieved later by uid or delivered to a callback URL.
+- name: Backoff Strategy
+  description: Clients should poll job status with exponential backoff and honor Retry-After on any 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

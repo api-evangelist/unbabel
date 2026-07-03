@@ -1,0 +1,114 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Unbabel
+providerId: unbabel
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Translation
+- Localization
+- LangOps
+- Plans
+description: >-
+  Unbabel is a sales-led, enterprise Language Operations platform. There is no
+  public self-service price list for the Translation API; pricing is quoted per
+  customer and generally combines a platform/subscription fee with per-word (or
+  per-character) translation charges that step down with volume, typically under
+  a minimum monthly volume commitment. Third-party marketplaces have reported
+  tiers in the range of roughly $10k/month (Starter) to $120k/month (Enterprise)
+  plus custom Pay-As-You-Go, but these are not official Unbabel figures. Unbabel
+  also offers newer self-service options and the standalone Widn.AI product,
+  which is priced separately. Treat all amounts here as directional until
+  reconciled with an Unbabel quote.
+notes: >-
+  Contact sales@unbabel.com or visit unbabel.com/pricing for a current quote. The
+  API itself carries no separate fee beyond the translation volume it drives.
+  Widn.AI (widn.ai) is priced independently of the Unbabel Translation API.
+sources:
+- https://unbabel.com/
+- https://developers.unbabel.com
+- https://unbabel.com/pricing/
+- https://www.g2.com/products/unbabel/pricing
+plans:
+- id: unbabel-payg
+  name: Pay As You Go
+  type: usage
+  description: >-
+    Consumption-based translation billed primarily on words/characters
+    translated, without a large fixed commitment. Custom quoted.
+  entries:
+  - label: Words Translated
+    name: words_translated
+    type: usage
+    metric: words
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: custom per-word rate (contact sales)
+    userMultiplied: false
+  elements:
+  - name: Translation API Access
+  - name: AI Plus Human Review
+  - name: Machine Translation
+- id: unbabel-subscription
+  name: Subscription / Committed Volume
+  type: subscription
+  description: >-
+    Platform subscription plus a committed monthly translation volume, with
+    per-word rates that decrease as volume increases. Marketplace-reported tiers
+    range from roughly $10k/month to $120k/month; figures are unofficial.
+  entries:
+  - label: Platform Subscription
+    name: platform_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: custom (reported ~$10k-$120k/month, unofficial)
+    userMultiplied: false
+  - label: Committed Words
+    name: committed_words
+    type: usage
+    metric: words
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: tiered per-word rate within commitment
+    userMultiplied: false
+  elements:
+  - name: Translation API Access
+  - name: Quality Intelligence
+  - name: Integrations and Connectors
+  - name: Support
+- id: unbabel-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom enterprise agreement for high-volume localization across support,
+    marketing, and content, with SLAs, security review, dedicated support, and
+    negotiated per-word pricing. Contact Unbabel.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: SLAs and Dedicated Support
+  - name: Security and Compliance Review
+  - name: Custom Language Pairs and Tuning
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

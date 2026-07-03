@@ -1,0 +1,99 @@
+aid: unbabel
+name: Unbabel
+review:
+  question: Does Unbabel expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Unbabel's public developer surface (the
+    tapi/v2 Translation API) is request/response REST over HTTPS. Translation is
+    asynchronous, but the server-push mechanism is an HTTP callback (webhook):
+    when a translation job changes status, Unbabel POSTs a notification to a
+    caller-supplied callback_url. There is no bidirectional or streaming
+    WebSocket (ws:// or wss://) transport on Unbabel's own API to model. The
+    callback is server-to-endpoint HTTP, not a socket.
+findings:
+  summary: |
+    Unbabel does not publish a documented public WebSocket API. Unbabel is a
+    Language Operations (LangOps) platform combining always-on AI translation
+    with on-demand human review. Its documented developer surface is the
+    Unbabel Translation API (tapi/v2) at base https://api.unbabel.com/tapi/v2
+    (sandbox https://sandbox.unbabel.com/tapi/v2), authenticated with a token
+    header of the form "Authorization: ApiKey <username>:<api_key>". The API is
+    pure request/response REST. Translation is asynchronous: POST /translation/
+    returns a job uid immediately, and the result is retrieved by polling
+    GET /translation/{uid}/ or by having Unbabel POST a notification to a
+    caller-supplied callback_url. No realtime, bidirectional, or streaming
+    WebSocket endpoint is documented on Unbabel's own API.
+  productStatus: |
+    The tapi/v2 Translation API remains the documented developer surface at
+    developers.unbabel.com. Alongside it, Unbabel launched Widn.AI, a standalone
+    LLM-based translation product with its own separate RESTful API (widn.ai,
+    docs at widn.ai/api-docs) offering text/file translation plus quality
+    evaluation/estimation. Unbabel has also combined with TransPerfect, and its
+    research and models (TowerLLM, COMET, Widn.AI) now also feed TransPerfect's
+    GlobalLink platform. For a developer integrating "the Unbabel API" today, the
+    tapi/v2 Translation API is still the primary documented surface, with Widn.AI
+    as the newer AI-first alternative. Neither exposes a public WebSocket.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.unbabel.com/tapi/v2
+      documented: true
+      note: 'The Unbabel Translation API. Sandbox base is https://sandbox.unbabel.com/tapi/v2. Token auth via header "Authorization: ApiKey <username>:<api_key>".'
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Asynchronous job completion is delivered by Unbabel POSTing to a caller-supplied callback_url. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Unbabel's tapi/v2 developer reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.unbabel.com/tapi/v2/translation/
+    - POST   https://api.unbabel.com/tapi/v2/translation/
+    - PATCH  https://api.unbabel.com/tapi/v2/translation/
+    - GET    https://api.unbabel.com/tapi/v2/translation/{uid}/
+    - GET    https://api.unbabel.com/tapi/v2/mt_translation/
+    - POST   https://api.unbabel.com/tapi/v2/mt_translation/
+    - GET    https://api.unbabel.com/tapi/v2/mt_translation/{uid}/
+    - PATCH  https://api.unbabel.com/tapi/v2/mt_translation/{uid}/
+    - GET    https://api.unbabel.com/tapi/v2/language_pair/
+    - GET    https://api.unbabel.com/tapi/v2/tone/
+    - GET    https://api.unbabel.com/tapi/v2/topic/
+    - POST   https://api.unbabel.com/tapi/v2/wordcount/
+    - GET    https://api.unbabel.com/tapi/v2/account/
+  endpointsModeled:
+    - method: POST
+      target: caller-supplied callback_url
+      note: Unbabel-to-caller notification POSTed when a translation job status changes. Payload shape modeled from documented callback behavior, not a published schema.
+sources:
+  - url: https://developers.unbabel.com
+    type: Documentation
+    note: Unbabel developer portal (Stoplight). tapi/v2 Translation API reference; all REST. No WebSocket mentioned.
+  - url: https://developers.unbabel.com/docs/introduction
+    type: Documentation
+    note: API introduction, async submission with callback, token auth.
+  - url: https://developers.unbabel.com/reference/translation-list-update
+    type: APIReference
+    note: translation/ list and update operations.
+  - url: https://developers.unbabel.com/docs/translation-detail
+    type: APIReference
+    note: GET translation/{uid}/ retrieval.
+  - url: https://github.com/Unbabel/unbabel-py
+    type: SourceCode
+    note: Official Python client; confirms translation, mt_translation, language_pair, tone, topic, account, and wordcount endpoints and ApiKey auth.
+  - url: https://widn.ai/api-docs
+    type: Documentation
+    note: Widn.AI standalone AI translation API (separate product/surface); REST, API key auth, no WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Unbabel's own public API is
+    request/response REST (tapi/v2) with asynchronous job completion delivered
+    via an HTTP callback (webhook) to a caller-supplied URL. No AsyncAPI document
+    was created because there is no server-push socket transport on Unbabel's own
+    API to model; the callback is ordinary server-to-endpoint HTTP.

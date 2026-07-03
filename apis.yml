@@ -1,0 +1,178 @@
+aid: unbabel
+url: https://raw.githubusercontent.com/api-evangelist/unbabel/refs/heads/main/apis.yml
+name: Unbabel
+kind: company
+description: Unbabel is a Language Operations (LangOps) platform that combines
+  always-on AI translation with on-demand human review to localize customer
+  support, marketing, and other business content at scale. Its long-standing
+  developer surface is the Unbabel Translation API (tapi/v2, base
+  https://api.unbabel.com/tapi/v2), an asynchronous REST API where callers submit
+  text with a source/target language pair, tone, and topic, then retrieve the
+  completed AI-plus-human translation by uid or via a callback. Unbabel also
+  offers a pure machine-translation path (mt_translation) and helper resources
+  for language pairs, tones, topics, word count, and account details. Unbabel has
+  since launched the standalone LLM-based product Widn.AI (its own RESTful API at
+  widn.ai) and, following its combination with TransPerfect, its research and
+  models (TowerLLM, COMET, Widn.AI) now also feed the GlobalLink platform; the
+  tapi/v2 Translation API remains the documented developer surface at
+  developers.unbabel.com.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Translation
+- Localization
+- Language Operations
+- LangOps
+- Machine Translation
+- Human in the Loop
+- AI
+created: '2026-07-03'
+modified: '2026-07-03'
+specificationVersion: '0.19'
+apis:
+- aid: unbabel:unbabel-translation-api
+  name: Unbabel Translation API
+  tags:
+  - Translation
+  - Jobs
+  - Human in the Loop
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/docs/introduction
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/docs/introduction
+    type: Documentation
+  - url: https://developers.unbabel.com/reference/translation-list-update
+    type: APIReference
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  - url: collections/unbabel.postman_collection.json
+    type: PostmanCollection
+  - url: collections/unbabel.opencollection.json
+    type: OpenCollection
+  description: Asynchronously submit text for AI-plus-human translation and manage
+    the resulting translation jobs. Create a translation with a source/target
+    language pair, tone, topic, and optional callback URL, then list jobs by
+    status or retrieve a specific job by uid to read the completed translated
+    text, price, and status.
+- aid: unbabel:unbabel-machine-translation-api
+  name: Unbabel Machine Translation API
+  tags:
+  - Machine Translation
+  - MT
+  - AI
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/docs/introduction
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/docs/introduction
+    type: Documentation
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: Request pure machine translation (no human review) via the
+    mt_translation resource, list MT jobs by status, retrieve a specific MT job by
+    uid, and optionally upgrade a machine translation to a full human-reviewed
+    translation.
+- aid: unbabel:unbabel-language-pairs-api
+  name: Unbabel Language Pairs API
+  tags:
+  - Language Pairs
+  - Languages
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/reference/language-pair
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/reference/language-pair
+    type: APIReference
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: List the source-to-target language pairs Unbabel can translate,
+    optionally filtered by a set of training languages. Used to validate a
+    requested language combination before submitting a translation.
+- aid: unbabel:unbabel-tone-topic-api
+  name: Unbabel Tone and Topic API
+  tags:
+  - Tone
+  - Topic
+  - Metadata
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/reference/tone
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/reference/tone
+    type: APIReference
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: List the tones (for example formal or friendly) and topics/domains
+    available for a translation, so callers can steer register and subject-matter
+    context when submitting text.
+- aid: unbabel:unbabel-word-count-api
+  name: Unbabel Word Count API
+  tags:
+  - Word Count
+  - Pricing
+  - Utility
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/reference/word-count
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/reference/word-count
+    type: APIReference
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: Calculate the billable word count for a block of text before
+    submitting it for translation, letting callers estimate cost and volume
+    against their plan.
+- aid: unbabel:unbabel-account-api
+  name: Unbabel Account API
+  tags:
+  - Account
+  - Customer
+  - Balance
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/reference/account
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/reference/account
+    type: APIReference
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: Retrieve the authenticated customer account's information, including
+    identity and balance/usage details, for the API credentials in use.
+- aid: unbabel:unbabel-notifications-api
+  name: Unbabel Notifications API
+  tags:
+  - Webhooks
+  - Callbacks
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.unbabel.com/docs/introduction
+  baseURL: https://api.unbabel.com/tapi/v2
+  properties:
+  - url: https://developers.unbabel.com/docs/introduction
+    type: Documentation
+  - url: openapi/unbabel-openapi.yml
+    type: OpenAPI
+  description: Because translation is asynchronous, callers can supply a
+    callback_url when creating a translation and Unbabel will POST a notification
+    to that HTTP endpoint when the job changes status (for example completed).
+    This is a server-to-endpoint webhook callback, not a WebSocket; the exact
+    payload shape is modeled from the documented callback behavior.
+common:
+- type: GitHubOrganization
+  url: https://github.com/Unbabel
+- type: LinkedIn
+  url: https://www.linkedin.com/company/unbabel
+- type: Website
+  url: https://unbabel.com
+- type: Documentation
+  url: https://developers.unbabel.com
+- type: Plans
+  url: plans/unbabel-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/unbabel-rate-limits.yml
+- type: FinOps
+  url: finops/unbabel-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

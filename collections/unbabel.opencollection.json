@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Translation API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "ApiKey {{username}}:{{apiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Translation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List translations", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/translation/?status=delivered",
+            "params": [
+              { "name": "status", "value": "delivered", "type": "query", "description": "Filter jobs by status." }
+            ]
+          },
+          "docs": "Lists translation jobs, optionally filtered by status."
+        },
+        {
+          "info": { "name": "Submit a translation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/translation/",
+            "body": { "type": "json", "data": "{\n  \"text\": \"Hello, world!\",\n  \"source_language\": \"en\",\n  \"target_language\": \"pt\",\n  \"tone\": \"Friendly\",\n  \"topic\": \"General\",\n  \"callback_url\": \"https://example.com/unbabel/callback\"\n}" }
+          },
+          "docs": "Asynchronously submits text for AI-plus-human translation. Returns the job uid immediately."
+        },
+        {
+          "info": { "name": "Retrieve a translation", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/translation/:uid/",
+            "params": [
+              { "name": "uid", "value": "", "type": "path", "description": "The unique identifier of the translation job." }
+            ]
+          },
+          "docs": "Retrieves a single translation job by its uid."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Machine Translation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List machine translations", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/"
+          },
+          "docs": "Lists machine-translation jobs, optionally filtered by status."
+        },
+        {
+          "info": { "name": "Submit a machine translation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/",
+            "body": { "type": "json", "data": "{\n  \"text\": \"Hello, world!\",\n  \"source_language\": \"en\",\n  \"target_language\": \"pt\"\n}" }
+          },
+          "docs": "Submits text for pure machine translation with no human review."
+        },
+        {
+          "info": { "name": "Retrieve a machine translation", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/:uid/",
+            "params": [
+              { "name": "uid", "value": "", "type": "path", "description": "The unique identifier of the machine-translation job." }
+            ]
+          },
+          "docs": "Retrieves a single machine-translation job by its uid."
+        },
+        {
+          "info": { "name": "Upgrade a machine translation", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/:uid/",
+            "params": [
+              { "name": "uid", "value": "", "type": "path", "description": "The unique identifier of the machine-translation job." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Upgrades an existing machine-translation job to a full human-reviewed translation."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Metadata", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List language pairs", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/language_pair/"
+          },
+          "docs": "Lists the supported source-to-target language pairs."
+        },
+        {
+          "info": { "name": "List tones", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/tone/"
+          },
+          "docs": "Lists the tones available for a translation."
+        },
+        {
+          "info": { "name": "List topics", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/topic/"
+          },
+          "docs": "Lists the topics/domains available for subject-matter context."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Utility", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Calculate word count", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/wordcount/",
+            "body": { "type": "json", "data": "{\n  \"text\": \"Hello, world!\",\n  \"text_format\": \"text\"\n}" }
+          },
+          "docs": "Calculates the billable word count for a block of text."
+        },
+        {
+          "info": { "name": "Retrieve account", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/account/"
+          },
+          "docs": "Retrieves the authenticated customer account's information and balance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

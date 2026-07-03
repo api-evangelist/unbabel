@@ -1,0 +1,209 @@
+{
+  "info": {
+    "name": "Unbabel Translation API",
+    "description": "Asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Submit text with a source/target language pair, tone, and topic; Unbabel returns a job uid immediately and processes the translation with always-on AI plus optional human review. Base URL: https://api.unbabel.com/tapi/v2 (production) or https://sandbox.unbabel.com/tapi/v2 (sandbox). Authentication uses a header of the form 'Authorization: ApiKey <username>:<api_key>'.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.unbabel.com/tapi/v2", "type": "string" },
+    { "key": "apiKeyHeader", "value": "ApiKey username:api_key", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Translation",
+      "item": [
+        {
+          "name": "List translations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/translation/?status=delivered",
+              "host": ["{{baseUrl}}"],
+              "path": ["translation", ""],
+              "query": [{ "key": "status", "value": "delivered" }]
+            },
+            "description": "Lists translation jobs, optionally filtered by status."
+          }
+        },
+        {
+          "name": "Submit a translation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "{{apiKeyHeader}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"Hello, world!\",\n  \"source_language\": \"en\",\n  \"target_language\": \"pt\",\n  \"text_format\": \"text\",\n  \"tone\": \"Friendly\",\n  \"topic\": \"General\",\n  \"callback_url\": \"https://example.com/unbabel/callback\"\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/translation/",
+              "host": ["{{baseUrl}}"],
+              "path": ["translation", ""]
+            },
+            "description": "Asynchronously submits text for AI-plus-human translation. Returns the job uid immediately."
+          }
+        },
+        {
+          "name": "Retrieve a translation",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/translation/:uid/",
+              "host": ["{{baseUrl}}"],
+              "path": ["translation", ":uid", ""],
+              "variable": [{ "key": "uid", "value": "" }]
+            },
+            "description": "Retrieves a single translation job by its uid."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Machine Translation",
+      "item": [
+        {
+          "name": "List machine translations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/mt_translation/",
+              "host": ["{{baseUrl}}"],
+              "path": ["mt_translation", ""]
+            },
+            "description": "Lists machine-translation jobs, optionally filtered by status."
+          }
+        },
+        {
+          "name": "Submit a machine translation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "{{apiKeyHeader}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"Hello, world!\",\n  \"source_language\": \"en\",\n  \"target_language\": \"pt\"\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/mt_translation/",
+              "host": ["{{baseUrl}}"],
+              "path": ["mt_translation", ""]
+            },
+            "description": "Submits text for pure machine translation with no human review."
+          }
+        },
+        {
+          "name": "Retrieve a machine translation",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/mt_translation/:uid/",
+              "host": ["{{baseUrl}}"],
+              "path": ["mt_translation", ":uid", ""],
+              "variable": [{ "key": "uid", "value": "" }]
+            },
+            "description": "Retrieves a single machine-translation job by its uid."
+          }
+        },
+        {
+          "name": "Upgrade a machine translation",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "{{apiKeyHeader}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": {
+              "raw": "{{baseUrl}}/mt_translation/:uid/",
+              "host": ["{{baseUrl}}"],
+              "path": ["mt_translation", ":uid", ""],
+              "variable": [{ "key": "uid", "value": "" }]
+            },
+            "description": "Upgrades an existing machine-translation job to a full human-reviewed translation."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata",
+      "item": [
+        {
+          "name": "List language pairs",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/language_pair/",
+              "host": ["{{baseUrl}}"],
+              "path": ["language_pair", ""]
+            },
+            "description": "Lists the supported source-to-target language pairs."
+          }
+        },
+        {
+          "name": "List tones",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/tone/",
+              "host": ["{{baseUrl}}"],
+              "path": ["tone", ""]
+            },
+            "description": "Lists the tones available for a translation."
+          }
+        },
+        {
+          "name": "List topics",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/topic/",
+              "host": ["{{baseUrl}}"],
+              "path": ["topic", ""]
+            },
+            "description": "Lists the topics/domains available for subject-matter context."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Utility",
+      "item": [
+        {
+          "name": "Calculate word count",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "{{apiKeyHeader}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"Hello, world!\",\n  \"text_format\": \"text\"\n}" },
+            "url": {
+              "raw": "{{baseUrl}}/wordcount/",
+              "host": ["{{baseUrl}}"],
+              "path": ["wordcount", ""]
+            },
+            "description": "Calculates the billable word count for a block of text."
+          }
+        },
+        {
+          "name": "Retrieve account",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "{{apiKeyHeader}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/account/",
+              "host": ["{{baseUrl}}"],
+              "path": ["account", ""]
+            },
+            "description": "Retrieves the authenticated customer account's information and balance."
+          }
+        }
+      ]
+    }
+  ]
+}

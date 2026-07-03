@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Unbabel
+providerId: unbabel
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Translation
+- LangOps
+- Localization
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Unbabel spend. Unbabel is an enterprise Language Operations
+  platform billed on a quote basis: a platform/subscription fee plus per-word (or
+  per-character) translation charges that decrease with volume, usually under a
+  minimum monthly commitment. The dominant cost driver is translated volume
+  (words/characters), influenced by language pair, tone/topic, and whether jobs
+  use pure machine translation or AI-plus-human review. There is no public
+  self-service rate card; amounts must be reconciled against an Unbabel
+  agreement.
+notes: >-
+  Per-unit rates are not reconciled here; verify with an Unbabel quote. Cost can
+  be optimized by using mt_translation for low-stakes content, batching, reusing
+  translation memory/glossaries, and calling the wordcount endpoint to forecast
+  volume before submission.
+sources:
+- https://unbabel.com/
+- https://developers.unbabel.com
+- https://unbabel.com/pricing/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Unbabel
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Unbabel Translation API
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Unbabel
+  PublisherName: Unbabel
+  InvoiceIssuerName: Unbabel
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: words_translated
+  description: Words (or characters) translated, the primary billed unit for translation jobs.
+  unit: words
+  aggregation: sum
+  dimensions:
+  - account
+  - language_pair
+  - job_type
+- name: human_review
+  description: AI-plus-human reviewed translations, typically priced above pure machine translation.
+  unit: words
+  aggregation: sum
+  dimensions:
+  - account
+  - language_pair
+- name: machine_translation
+  description: Pure machine-translation (mt_translation) volume, typically lower cost than human-reviewed jobs.
+  unit: words
+  aggregation: sum
+  dimensions:
+  - account
+  - language_pair
+- name: platform_subscription
+  description: Fixed platform/subscription fee where applicable, independent of translated volume.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track translated words per language pair and job type; use the wordcount endpoint to forecast cost before submitting.
+- name: Allocation
+  description: Tag translation jobs by team, product, or content type so translation spend maps to internal cost centers.
+- name: Optimization
+  description: Route low-stakes content through mt_translation, reserve AI-plus-human review for high-value content, and reuse translation memory and glossaries to avoid re-translating repeated strings.
+- name: Accountability
+  description: Assign owners per workload; review monthly translated volume against the committed volume in the Unbabel agreement.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
