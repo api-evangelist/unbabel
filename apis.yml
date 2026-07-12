@@ -159,6 +159,14 @@ apis:
     This is a server-to-endpoint webhook callback, not a WebSocket; the exact
     payload shape is modeled from the documented callback behavior.
 common:
+- type: TrustCenter
+  url: security/unbabel-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/unbabel-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/unbabel-domain-security.yml
+- type: Authentication
+  url: authentication/unbabel-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/Unbabel
 - type: LinkedIn
@@ -173,6 +181,8 @@ common:
   url: rate-limits/unbabel-rate-limits.yml
 - type: FinOps
   url: finops/unbabel-finops.yml
+- url: https://unbabel.com/feed/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

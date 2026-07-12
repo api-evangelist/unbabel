@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/unbabel-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Token authentication of the form `Authorization: ApiKey <username>:<api_key>`.'
+  sources:
+  - openapi/unbabel-openapi.yml
