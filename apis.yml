@@ -159,6 +159,8 @@ apis:
     This is a server-to-endpoint webhook callback, not a WebSocket; the exact
     payload shape is modeled from the documented callback behavior.
 common:
+- type: AgenticAccess
+  url: agentic-access/unbabel-agentic-access.yml
 - type: TrustCenter
   url: security/unbabel-trust-center.yml
 - type: VulnerabilityDisclosure
