@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: Unbabel Translation Account Language Pairs API
+  description: 'The Unbabel Translation API (tapi/v2) is an asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Callers submit text with a source/target language pair, tone, and topic; Unbabel returns a job identifier (uid) immediately and processes the translation with always-on AI plus optional human review. Results are retrieved by uid, by listing jobs by status, or delivered to a callback URL. The API also exposes a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details.
+
+    Authentication uses a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is https://api.unbabel.com/tapi/v2 and a sandbox is available at https://sandbox.unbabel.com/tapi/v2. Endpoints for translation, mt_translation, language_pair, tone, topic, account, and wordcount are confirmed from Unbabel''s public developer docs and the official unbabel-py client; the asynchronous callback (webhook) payload is modeled from the documented callback behavior.'
+  version: '2.0'
+  contact:
+    name: Unbabel Developers
+    url: https://developers.unbabel.com
+servers:
+- url: https://api.unbabel.com/tapi/v2
+  description: Production
+- url: https://sandbox.unbabel.com/tapi/v2
+  description: Sandbox
+security:
+- apiKeyAuth: []
+tags:
+- name: Language Pairs
+  description: Supported source-to-target language combinations.
+paths:
+  /language_pair/:
+    get:
+      operationId: listLanguagePairs
+      tags:
+      - Language Pairs
+      summary: List language pairs
+      description: Lists the supported source-to-target language pairs, optionally filtered by a set of training languages.
+      parameters:
+      - name: train_langs
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma-separated language codes to filter the returned pairs.
+      responses:
+        '200':
+          description: A list of supported language pairs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LanguagePair'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Language:
+      type: object
+      properties:
+        name:
+          type: string
+        shortname:
+          type: string
+    LanguagePair:
+      type: object
+      properties:
+        lang_pair:
+          type: object
+          properties:
+            source_language:
+              $ref: '#/components/schemas/Language'
+            target_language:
+              $ref: '#/components/schemas/Language'
+  responses:
+    Unauthorized:
+      description: Missing or invalid API credentials.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token authentication of the form `Authorization: ApiKey <username>:<api_key>`.'

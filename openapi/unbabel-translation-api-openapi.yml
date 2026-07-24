@@ -1,0 +1,212 @@
+openapi: 3.0.3
+info:
+  title: Unbabel Account Translation API
+  description: 'The Unbabel Translation API (tapi/v2) is an asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Callers submit text with a source/target language pair, tone, and topic; Unbabel returns a job identifier (uid) immediately and processes the translation with always-on AI plus optional human review. Results are retrieved by uid, by listing jobs by status, or delivered to a callback URL. The API also exposes a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details.
+
+    Authentication uses a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is https://api.unbabel.com/tapi/v2 and a sandbox is available at https://sandbox.unbabel.com/tapi/v2. Endpoints for translation, mt_translation, language_pair, tone, topic, account, and wordcount are confirmed from Unbabel''s public developer docs and the official unbabel-py client; the asynchronous callback (webhook) payload is modeled from the documented callback behavior.'
+  version: '2.0'
+  contact:
+    name: Unbabel Developers
+    url: https://developers.unbabel.com
+servers:
+- url: https://api.unbabel.com/tapi/v2
+  description: Production
+- url: https://sandbox.unbabel.com/tapi/v2
+  description: Sandbox
+security:
+- apiKeyAuth: []
+tags:
+- name: Translation
+  description: Submit and manage AI-plus-human translation jobs.
+paths:
+  /translation/:
+    get:
+      operationId: listTranslations
+      tags:
+      - Translation
+      summary: List translations
+      description: Lists translation jobs, optionally filtered by status.
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - new
+          - accepted
+          - translating
+          - delivered
+          - canceled
+          - failed
+        description: Filter jobs by their current status.
+      responses:
+        '200':
+          description: A list of translation jobs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Translation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTranslation
+      tags:
+      - Translation
+      summary: Submit a translation
+      description: Asynchronously submits text for translation. Returns immediately with the job uid and status; the completed translation is retrieved later by uid or delivered to the optional callback_url.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationRequest'
+      responses:
+        '201':
+          description: The created translation job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Translation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    patch:
+      operationId: bulkUpdateTranslations
+      tags:
+      - Translation
+      summary: Bulk translation operations
+      description: Submits or updates multiple translation jobs in a single request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                objects:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TranslationRequest'
+      responses:
+        '202':
+          description: Bulk request accepted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /translation/{uid}/:
+    get:
+      operationId: getTranslation
+      tags:
+      - Translation
+      summary: Retrieve a translation
+      description: Retrieves a single translation job by its uid.
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the translation job.
+      responses:
+        '200':
+          description: The requested translation job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Translation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    TranslationRequest:
+      type: object
+      required:
+      - text
+      - source_language
+      - target_language
+      properties:
+        text:
+          type: string
+          description: The source text to translate.
+        source_language:
+          type: string
+          description: Source language code (for example en).
+        target_language:
+          type: string
+          description: Target language code (for example pt).
+        text_format:
+          type: string
+          enum:
+          - text
+          - html
+          - xliff
+          default: text
+        tone:
+          type: string
+          description: Optional tone/register for the translation.
+        topic:
+          type: string
+          description: Optional topic/domain for subject-matter context.
+        callback_url:
+          type: string
+          format: uri
+          description: Optional HTTP endpoint Unbabel will POST a notification to when the job status changes.
+        instructions:
+          type: string
+          description: Optional free-text instructions for the translator.
+    Translation:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier of the translation job.
+        status:
+          type: string
+          description: Current job status (new, accepted, translating, delivered, etc.).
+        text:
+          type: string
+          description: The original source text.
+        translatedText:
+          type: string
+          description: The translated text, present once the job is delivered.
+        source_language:
+          type: string
+        target_language:
+          type: string
+        text_format:
+          type: string
+        tone:
+          type: string
+        topic:
+          type: string
+        price:
+          type: number
+          description: Price of the translation job.
+        wordcount:
+          type: integer
+        callback_url:
+          type: string
+          format: uri
+  responses:
+    Unauthorized:
+      description: Missing or invalid API credentials.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    NotFound:
+      description: The requested resource was not found.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token authentication of the form `Authorization: ApiKey <username>:<api_key>`.'

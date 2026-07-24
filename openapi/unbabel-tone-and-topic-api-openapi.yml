@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Unbabel Translation Account Tone and Topic API
+  description: 'The Unbabel Translation API (tapi/v2) is an asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Callers submit text with a source/target language pair, tone, and topic; Unbabel returns a job identifier (uid) immediately and processes the translation with always-on AI plus optional human review. Results are retrieved by uid, by listing jobs by status, or delivered to a callback URL. The API also exposes a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details.
+
+    Authentication uses a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is https://api.unbabel.com/tapi/v2 and a sandbox is available at https://sandbox.unbabel.com/tapi/v2. Endpoints for translation, mt_translation, language_pair, tone, topic, account, and wordcount are confirmed from Unbabel''s public developer docs and the official unbabel-py client; the asynchronous callback (webhook) payload is modeled from the documented callback behavior.'
+  version: '2.0'
+  contact:
+    name: Unbabel Developers
+    url: https://developers.unbabel.com
+servers:
+- url: https://api.unbabel.com/tapi/v2
+  description: Production
+- url: https://sandbox.unbabel.com/tapi/v2
+  description: Sandbox
+security:
+- apiKeyAuth: []
+tags:
+- name: Tone and Topic
+  description: Available tones and topics/domains for a translation.
+paths:
+  /tone/:
+    get:
+      operationId: listTones
+      tags:
+      - Tone and Topic
+      summary: List tones
+      description: Lists the tones available for a translation, such as formal or friendly.
+      responses:
+        '200':
+          description: A list of available tones.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tone'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /topic/:
+    get:
+      operationId: listTopics
+      tags:
+      - Tone and Topic
+      summary: List topics
+      description: Lists the topics/domains available to provide subject-matter context.
+      responses:
+        '200':
+          description: A list of available topics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Topic'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Tone:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    Topic:
+      type: object
+      properties:
+        name:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API credentials.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Token authentication of the form `Authorization: ApiKey <username>:<api_key>`.'
