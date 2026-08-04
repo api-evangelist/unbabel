@@ -1,0 +1,24 @@
+{
+  "provider": "unbabel",
+  "sources": [
+    "unbabel-account-api-openapi.yml",
+    "unbabel-language-pairs-api-openapi.yml",
+    "unbabel-machine-translation-api-openapi.yml",
+    "unbabel-tone-and-topic-api-openapi.yml",
+    "unbabel-translation-api-openapi.yml",
+    "unbabel-word-count-api-openapi.yml"
+  ],
+  "outputs": [
+    "unbabel-account-api-openapi.yml",
+    "unbabel-language-pairs-api-openapi.yml",
+    "unbabel-machine-translation-api-openapi.yml",
+    "unbabel-tone-and-topic-api-openapi.yml",
+    "unbabel-translation-api-openapi.yml",
+    "unbabel-word-count-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
