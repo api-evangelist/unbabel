@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Translation Account Tone and Topic API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tone and Topic",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/tone/"
+          },
+          "docs": "Lists the tones available for a translation, such as formal or friendly."
+        },
+        {
+          "info": {
+            "name": "List topics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/topic/"
+          },
+          "docs": "Lists the topics/domains available to provide subject-matter context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

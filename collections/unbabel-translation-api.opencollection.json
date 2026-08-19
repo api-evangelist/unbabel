@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Account Translation API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Translation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/translation/",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by their current status."
+              }
+            ]
+          },
+          "docs": "Lists translation jobs, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "Submit a translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/translation/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Asynchronously submits text for translation. Returns immediately with the job uid and status; the completed translation is retrieved later by uid or delivered to the optional callback_url."
+        },
+        {
+          "info": {
+            "name": "Bulk translation operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unbabel.com/tapi/v2/translation/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits or updates multiple translation jobs in a single request."
+        },
+        {
+          "info": {
+            "name": "Retrieve a translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/translation/:uid/",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the translation job."
+              }
+            ]
+          },
+          "docs": "Retrieves a single translation job by its uid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

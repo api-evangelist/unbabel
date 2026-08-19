@@ -1,0 +1,186 @@
+{
+  "item": [
+    {
+      "id": "2ba9a111-b7fc-477a-b5f2-4e012e05f7fe",
+      "name": "Language Pairs",
+      "description": {
+        "content": "Supported source-to-target language combinations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16db908e-a0c0-4f7c-9024-121bc8de48d6",
+          "name": "List language pairs",
+          "request": {
+            "name": "List language pairs",
+            "description": {
+              "content": "Lists the supported source-to-target language pairs, optionally filtered by a set of training languages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "language_pair",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "train_langs",
+                  "value": "<string>",
+                  "description": "Comma-separated language codes to filter the returned pairs."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf4a40c3-3f5d-4e13-99bf-f9c6bc8cef5c",
+              "name": "A list of supported language pairs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "language_pair",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "train_langs",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"lang_pair\": {\n        \"source_language\": {\n          \"name\": \"string\",\n          \"shortname\": \"string\"\n        },\n        \"target_language\": {\n          \"name\": \"string\",\n          \"shortname\": \"string\"\n        }\n      }\n    },\n    {\n      \"lang_pair\": {\n        \"source_language\": {\n          \"name\": \"string\",\n          \"shortname\": \"string\"\n        },\n        \"target_language\": {\n          \"name\": \"string\",\n          \"shortname\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "556af79a-aa8c-4394-b6fb-c24b55283ba6",
+              "name": "Missing or invalid API credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "language_pair",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "train_langs",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unbabel.com/tapi/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "34ad7df4-05d1-490e-b56e-24a676cce484",
+    "name": "Unbabel Translation Account Language Pairs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unbabel Translation API (tapi/v2) is an asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Callers submit text with a source/target language pair, tone, and topic; Unbabel returns a job identifier (uid) immediately and processes the translation with always-on AI plus optional human review. Results are retrieved by uid, by listing jobs by status, or delivered to a callback URL. The API also exposes a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details.\nAuthentication uses a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is https://api.unbabel.com/tapi/v2 and a sandbox is available at https://sandbox.unbabel.com/tapi/v2. Endpoints for translation, mt_translation, language_pair, tone, topic, account, and wordcount are confirmed from Unbabel's public developer docs and the official unbabel-py client; the asynchronous callback (webhook) payload is modeled from the documented callback behavior.\n\nContact Support:\n Name: Unbabel Developers",
+      "type": "text/plain"
+    }
+  }
+}

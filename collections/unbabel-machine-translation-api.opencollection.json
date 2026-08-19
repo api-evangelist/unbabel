@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Translation Account Machine Translation API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Machine Translation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List machine translations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter machine-translation jobs by status."
+              }
+            ]
+          },
+          "docs": "Lists machine-translation jobs, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "Submit a machine translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits text for pure machine translation with no human review."
+        },
+        {
+          "info": {
+            "name": "Retrieve a machine translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/:uid/",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a single machine-translation job by its uid."
+        },
+        {
+          "info": {
+            "name": "Upgrade a machine translation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unbabel.com/tapi/v2/mt_translation/:uid/",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upgrades an existing machine-translation job to a full human-reviewed translation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

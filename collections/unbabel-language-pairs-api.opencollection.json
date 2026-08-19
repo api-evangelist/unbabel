@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Translation Account Language Pairs API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Language Pairs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List language pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unbabel.com/tapi/v2/language_pair/",
+            "params": [
+              {
+                "name": "train_langs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated language codes to filter the returned pairs."
+              }
+            ]
+          },
+          "docs": "Lists the supported source-to-target language pairs, optionally filtered by a set of training languages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

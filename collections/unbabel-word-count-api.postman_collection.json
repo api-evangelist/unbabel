@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "7938f8f0-3a1e-4883-8fb6-fa15c499281d",
+      "name": "Word Count",
+      "description": {
+        "content": "Billable word count calculation for a block of text.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4266111-9247-4bd9-a8f0-92d765a3c53e",
+          "name": "Calculate word count",
+          "request": {
+            "name": "Calculate word count",
+            "description": {
+              "content": "Calculates the billable word count for a block of text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wordcount",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"text_format\": \"text\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a333581b-871e-47b0-a80a-005f58e6f48e",
+              "name": "The calculated word count.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wordcount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"text_format\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"word_count\": 6266\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84541b4d-06d7-4df1-8f24-75b86bbeb66a",
+              "name": "The request was malformed or missing required parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wordcount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"text_format\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "685dcd18-6d7a-45b3-a97a-01475c8109f4",
+              "name": "Missing or invalid API credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wordcount",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"text_format\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unbabel.com/tapi/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6209978d-ccce-4cce-8a76-1d214a5399bc",
+    "name": "Unbabel Translation Account Word Count API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unbabel Translation API (tapi/v2) is an asynchronous REST API for the Unbabel Language Operations (LangOps) platform. Callers submit text with a source/target language pair, tone, and topic; Unbabel returns a job identifier (uid) immediately and processes the translation with always-on AI plus optional human review. Results are retrieved by uid, by listing jobs by status, or delivered to a callback URL. The API also exposes a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details.\nAuthentication uses a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is https://api.unbabel.com/tapi/v2 and a sandbox is available at https://sandbox.unbabel.com/tapi/v2. Endpoints for translation, mt_translation, language_pair, tone, topic, account, and wordcount are confirmed from Unbabel's public developer docs and the official unbabel-py client; the asynchronous callback (webhook) payload is modeled from the documented callback behavior.\n\nContact Support:\n Name: Unbabel Developers",
+      "type": "text/plain"
+    }
+  }
+}

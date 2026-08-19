@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unbabel Translation Account Word Count API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Word Count",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate word count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unbabel.com/tapi/v2/wordcount/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates the billable word count for a block of text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
