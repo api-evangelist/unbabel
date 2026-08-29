@@ -16,6 +16,18 @@ description: Unbabel is a Language Operations (LangOps) platform that combines
   models (TowerLLM, COMET, Widn.AI) now also feed the GlobalLink platform; the
   tapi/v2 Translation API remains the documented developer surface at
   developers.unbabel.com.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
