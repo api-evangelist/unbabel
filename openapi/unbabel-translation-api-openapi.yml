@@ -125,13 +125,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid API credentials.
   schemas:
     Translation:
       type: object
@@ -202,6 +195,13 @@ components:
         instructions:
           type: string
           description: Optional free-text instructions for the translator.
+  responses:
+    BadRequest:
+      description: The request was malformed or missing required parameters.
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid API credentials.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
