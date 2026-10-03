@@ -112,40 +112,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid API credentials.
+    BadRequest:
+      description: The request was malformed or missing required parameters.
   schemas:
-    Translation:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier of the translation job.
-        status:
-          type: string
-          description: Current job status (new, accepted, translating, delivered, etc.).
-        text:
-          type: string
-          description: The original source text.
-        translatedText:
-          type: string
-          description: The translated text, present once the job is delivered.
-        source_language:
-          type: string
-        target_language:
-          type: string
-        text_format:
-          type: string
-        tone:
-          type: string
-        topic:
-          type: string
-        price:
-          type: number
-          description: Price of the translation job.
-        wordcount:
-          type: integer
-        callback_url:
-          type: string
-          format: uri
     TranslationRequest:
       type: object
       required:
@@ -182,13 +156,39 @@ components:
         instructions:
           type: string
           description: Optional free-text instructions for the translator.
-  responses:
-    BadRequest:
-      description: The request was malformed or missing required parameters.
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid API credentials.
+    Translation:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier of the translation job.
+        status:
+          type: string
+          description: Current job status (new, accepted, translating, delivered, etc.).
+        text:
+          type: string
+          description: The original source text.
+        translatedText:
+          type: string
+          description: The translated text, present once the job is delivered.
+        source_language:
+          type: string
+        target_language:
+          type: string
+        text_format:
+          type: string
+        tone:
+          type: string
+        topic:
+          type: string
+        price:
+          type: number
+          description: Price of the translation job.
+        wordcount:
+          type: integer
+        callback_url:
+          type: string
+          format: uri
   securitySchemes:
     apiKeyAuth:
       type: apiKey
