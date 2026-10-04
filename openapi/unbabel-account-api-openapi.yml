@@ -34,6 +34,9 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API credentials.
   schemas:
     Account:
       type: object
@@ -45,9 +48,6 @@ components:
         balance:
           type: number
           description: Remaining prepaid balance or credit on the account.
-  responses:
-    Unauthorized:
-      description: Missing or invalid API credentials.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

@@ -46,6 +46,9 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API credentials.
   schemas:
     LanguagePair:
       type: object
@@ -64,9 +67,6 @@ components:
           type: string
         shortname:
           type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid API credentials.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
