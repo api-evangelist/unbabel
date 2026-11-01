@@ -1,4 +1,4 @@
-# Unbabel (unbabel)
+# Unbabel
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,91 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Unbabel is a Language Operations (LangOps) platform that combines always-on AI translation with on-demand human review to localize customer support, marketing, and other business content at scale. Its long-standing developer surface is the Unbabel Translation API (tapi/v2, base `https://api.unbabel.com/tapi/v2`), an asynchronous REST API where callers submit text with a source/target language pair, tone, and topic, then retrieve the completed AI-plus-human translation by uid or via a callback. Unbabel also offers a pure machine-translation path (`mt_translation`) and helper resources for language pairs, tones, topics, word count, and account details. Unbabel has since launched the standalone LLM-based product Widn.AI (its own RESTful API at widn.ai) and, following its combination with TransPerfect, its research and models (TowerLLM, COMET, Widn.AI) now also feed the GlobalLink platform; the tapi/v2 Translation API remains the documented developer surface at developers.unbabel.com.
+Unbabel is a Language Operations (LangOps) platform that combines always-on AI translation with on-demand human review to localize customer support, marketing, and other business content at scale. Its long-standing developer surface is the Unbabel Translation API (tapi/v2, base https://api.unbabel.com/tapi/v2), an asynchronous REST API where callers submit text with a source/target language pair, tone, and topic, then retrieve the completed AI-plus-human translation by uid or via a callback. Unbabel also offers a pure machine-translation path (mt_translation) and helper resources for language pairs, tones, topics, word count, and account details. Unbabel has since launched the standalone LLM-based product Widn.AI (its own RESTful API at widn.ai) and, following its combination with TransPerfect, its research and models (TowerLLM, COMET, Widn.AI) now also feed the GlobalLink platform; the tapi/v2 Translation API remains the documented developer surface at developers.unbabel.com.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/unbabel/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/unbabel/refs/heads/main/apis.yml)
+**Areas:** Translation · Localization · Language Operations · LangOps · Machine Translation · Human-in-the-Loop · Artificial Intelligence
 
-## Authentication
+## Unbabel on APIs.io
 
-Requests use a token header of the form `Authorization: ApiKey <username>:<api_key>`. The production base URL is `https://api.unbabel.com/tapi/v2`; a sandbox is available at `https://sandbox.unbabel.com/tapi/v2`.
+Everything profiled for Unbabel is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/unbabel/](https://apis.io/providers/unbabel/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- Translation
-- Localization
-- Language Operations
-- LangOps
-- Machine Translation
-- Human in the Loop
-- AI
+- [Unbabel Account API](https://apis.io/apis/unbabel/unbabel-account-api/) — Authenticated customer account information.
+- [Unbabel Language Pairs API](https://apis.io/apis/unbabel/unbabel-language-pairs-api/) — Supported source-to-target language combinations.
+- [Unbabel Machine Translation API](https://apis.io/apis/unbabel/unbabel-machine-translation-api/) — Pure machine-translation jobs, optionally upgradeable to human review.
+- [Unbabel Tone and Topic API](https://apis.io/apis/unbabel/unbabel-tone-and-topic-api/) — Available tones and topics/domains for a translation.
+- [Unbabel Translation API](https://apis.io/apis/unbabel/unbabel-translation-api/) — Submit and manage AI-plus-human translation jobs.
+- [Unbabel Word Count API](https://apis.io/apis/unbabel/unbabel-word-count-api/) — Billable word count calculation for a block of text.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Unbabel Translation API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Asynchronously submit text for AI-plus-human translation and manage the resulting translation jobs. Create a translation with a source/target language pair, tone, topic, and optional callback URL, then list jobs by status or retrieve a specific job by uid to read the completed translated text, price, and status.
+- [Unbabel Agentic Access](https://apis.io/agentic-access/unbabel/unbabel-agentic-access/)
 
-- **Human URL:** [https://developers.unbabel.com/docs/introduction](https://developers.unbabel.com/docs/introduction)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+#### Collections (7)
 
-### Unbabel Machine Translation API
+Postman and Open Collection request collections.
 
-Request pure machine translation (no human review) via the `mt_translation` resource, list MT jobs by status, retrieve a specific MT job by uid, and optionally upgrade a machine translation to a full human-reviewed translation.
+- [Unbabel Translation API](https://apis.io/collections/unbabel/open-unbabel/)
+- [Unbabel Translation Account API](https://apis.io/collections/unbabel/open-unbabel-account-api/)
+- [Unbabel Translation Account Language Pairs API](https://apis.io/collections/unbabel/open-unbabel-language-pairs-api/)
+- [Unbabel Translation Account Machine Translation API](https://apis.io/collections/unbabel/open-unbabel-machine-translation-api/)
+- [Unbabel Translation Account Tone and Topic API](https://apis.io/collections/unbabel/open-unbabel-tone-and-topic-api/)
+- [Unbabel Account Translation API](https://apis.io/collections/unbabel/open-unbabel-translation-api/)
+- [Unbabel Translation Account Word Count API](https://apis.io/collections/unbabel/open-unbabel-word-count-api/)
 
-- **Human URL:** [https://developers.unbabel.com/docs/introduction](https://developers.unbabel.com/docs/introduction)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+#### Security (4)
 
-### Unbabel Language Pairs API
+Authentication, trust centre, and vulnerability disclosure.
 
-List the source-to-target language pairs Unbabel can translate, optionally filtered by a set of training languages. Used to validate a requested language combination before submitting a translation.
+- [Unbabel Authentication](https://apis.io/security/unbabel/unbabel-authentication/)
+- [Unbabel Domain Security](https://apis.io/security/unbabel/unbabel-domain-security/)
+- [Unbabel Trust Center](https://apis.io/security/unbabel/unbabel-trust-center/)
+- [Unbabel Vulnerability Disclosure](https://apis.io/security/unbabel/unbabel-vulnerability-disclosure/)
 
-- **Human URL:** [https://developers.unbabel.com/reference/language-pair](https://developers.unbabel.com/reference/language-pair)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+#### Plans and pricing (1)
 
-### Unbabel Tone and Topic API
+Published plans, tiers and prices.
 
-List the tones (for example formal or friendly) and topics/domains available for a translation, so callers can steer register and subject-matter context when submitting text.
+- [Unbabel Plans Pricing](https://apis.io/plans/unbabel/unbabel-plans-pricing/)
 
-- **Human URL:** [https://developers.unbabel.com/reference/tone](https://developers.unbabel.com/reference/tone)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+#### Rate limits (1)
 
-### Unbabel Word Count API
+Published request limits.
 
-Calculate the billable word count for a block of text before submitting it for translation, letting callers estimate cost and volume against their plan.
+- [Unbabel Rate Limits](https://apis.io/rate-limits/unbabel/unbabel-rate-limits/)
 
-- **Human URL:** [https://developers.unbabel.com/reference/word-count](https://developers.unbabel.com/reference/word-count)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+#### FinOps (1)
 
-### Unbabel Account API
+What the API costs to run, by operation.
 
-Retrieve the authenticated customer account's information, including identity and balance/usage details, for the API credentials in use.
+- [Unbabel Finops](https://apis.io/finops/unbabel/unbabel-finops/)
 
-- **Human URL:** [https://developers.unbabel.com/reference/account](https://developers.unbabel.com/reference/account)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
+## Where to find this API
 
-### Unbabel Notifications API
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-Because translation is asynchronous, callers can supply a `callback_url` when creating a translation and Unbabel will POST a notification to that HTTP endpoint when the job changes status (for example completed). This is a server-to-endpoint webhook callback, not a WebSocket; the exact payload shape is modeled from the documented callback behavior.
-
-- **Human URL:** [https://developers.unbabel.com/docs/introduction](https://developers.unbabel.com/docs/introduction)
-- **Base URL:** `https://api.unbabel.com/tapi/v2`
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/Unbabel)
-- [LinkedIn](https://www.linkedin.com/company/unbabel)
 - [Website](https://unbabel.com)
 - [Documentation](https://developers.unbabel.com)
-- [Plans](plans/unbabel-plans-pricing.yml)
-- [Rate Limits](rate-limits/unbabel-rate-limits.yml)
-- [Fin Ops](finops/unbabel-finops.yml)
+- [Blog](https://unbabel.com/feed/)
+- [GitHub](https://github.com/Unbabel)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 15.8 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/unbabel/](https://apis.io/providers/unbabel/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Unbabel: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/unbabel/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
